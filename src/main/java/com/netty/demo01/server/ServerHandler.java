@@ -15,6 +15,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 
     /**
      * 读取客户端发送的数据
+     *
      * @param ctx
      * @param msg
      * @throws Exception
@@ -22,7 +23,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         //经过解码器，msg为String类型
-        RequestFuture requestFuture = JSONObject.parseObject(msg.toString(),RequestFuture.class);
+        RequestFuture requestFuture = JSONObject.parseObject(msg.toString(), RequestFuture.class);
         long id = requestFuture.getId();
         Response response = new Response();
         response.setId(id);

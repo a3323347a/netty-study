@@ -48,14 +48,14 @@ public class NettyClient {
             bootstrap.handler(new ChannelInitializer<NioSocketChannel>() {
                 @Override
                 protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
-                    nioSocketChannel.pipeline().addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE,0,4,0,4));
+                    nioSocketChannel.pipeline().addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4, 0, 4));
                     nioSocketChannel.pipeline().addLast(new StringDecoder());
                     nioSocketChannel.pipeline().addLast(handler);
-                    nioSocketChannel.pipeline().addLast(new LengthFieldPrepender(4,false));
+                    nioSocketChannel.pipeline().addLast(new LengthFieldPrepender(4, false));
                     nioSocketChannel.pipeline().addLast(new StringEncoder(Charset.defaultCharset()));
                 }
             });
-            ChannelFuture future = bootstrap.connect("127.0.0.1",8090).sync();
+            ChannelFuture future = bootstrap.connect("127.0.0.1", 8090).sync();
             RequestFuture requestFuture = new RequestFuture();
             requestFuture.setId(1);
             requestFuture.setRequest("Hello Word");
@@ -64,7 +64,7 @@ public class NettyClient {
 
             Response response = promise.get();
             System.out.println(JSONObject.toJSONString(response));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

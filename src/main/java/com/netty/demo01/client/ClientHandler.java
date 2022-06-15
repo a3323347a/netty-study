@@ -16,7 +16,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        Response response = JSONObject.parseObject(msg.toString(),Response.class);
+        Response response = JSONObject.parseObject(msg.toString(), Response.class);
         promise.setSuccess(response);
     }
 
