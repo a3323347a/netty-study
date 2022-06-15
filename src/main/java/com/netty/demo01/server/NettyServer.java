@@ -1,5 +1,6 @@
 package com.netty.demo01.server;
 
+import com.netty.demo02.server.ServerHandler02;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -38,7 +39,8 @@ public class NettyServer {
                                     new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4, 0, 4));
                             //把接收到的ByteBuf数据包转换成String
                             socketChannel.pipeline().addLast(new StringDecoder());
-                            socketChannel.pipeline().addLast(new ServerHandler());
+                            //socketChannel.pipeline().addLast(new ServerHandler()); demo01
+                            socketChannel.pipeline().addLast(new ServerHandler02()); //demo02
                             socketChannel.pipeline().addLast(new LengthFieldPrepender(4, false));
                             socketChannel.pipeline().addLast(new StringEncoder());
                         }
